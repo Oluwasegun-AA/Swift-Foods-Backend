@@ -136,8 +136,7 @@ describe('Validate POST Route', () => {
   describe('When a user attempts to login with wrong password', () => {
     it('should return error 401', (end) => {
       request(app).post('/api/v1/auth/login')
-        .set('x-access-token', test.user_token.validUser)
-        .send(test.fullUser2)
+        .send(test.firstUser)
         .type('JSON')
         .expect('Content-Type', /json/)
         .expect(function (res) {
@@ -162,8 +161,7 @@ describe('Validate POST Route', () => {
   describe('When a user attempts to login with correct details, but data does not exist in the database', () => {
     it('should not login successfully', (end) => {
       request(app).post('/api/v1/auth/login')
-        .set('x-access-token', test.user_token.valid_inexistingUser)
-        .send(test.loginUser)
+        .send(test.fullUser3)
         .type('JSON')
         .expect('Content-Type', /json/)
         .expect(function (res) {

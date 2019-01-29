@@ -40,8 +40,8 @@ export default class Controller {
 
   // eslint-disable-next-line class-methods-use-this
   async login(req, res) {
+    const command = 'SELECT * FROM user_accounts WHERE user_name=$1';
     if (req.body.hashedPassword) {
-      const command = 'SELECT * FROM user_accounts WHERE user_name=$1';
       const { rows } = await database.query(command, [req.body.user_name]);
       if (((req.body.hashedPassword) === (rows[0].user_password))
       && ((req.body.user_name) === (rows[0].user_name))) {
@@ -53,8 +53,8 @@ export default class Controller {
       }
       return res.status(404).send({ auth: 'false', token: null, message: 'user not found' });
     }
-    const command = 'SELECT * FROM user_accounts WHERE user_name=$1';
     const { rows } = await database.query(command, [req.body.user_name]);
+    console.log(rows[0]);
     if (!rows[0]) {
       return res.status(404).send({
         success: 'false',
