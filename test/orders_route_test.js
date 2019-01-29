@@ -64,7 +64,7 @@ describe('Validate GET Route', () => {
         res.body.auth = 'false';
         res.body.message = 'Failed to authenticate token';
       })
-      .expect(500, end)
+      .expect(401, end)
   });
   it(`should be return 'Forbidden Route, User not Authorised' when a user token tries to access a route with admin privilege`, (end) => {
     request(app).get('/api/v1/orders/1')
