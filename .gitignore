@@ -11,8 +11,8 @@ dist/
 coverage/
 
 #.vscode file
-.vscode/
+.vscode
 
 #.env
-.env/
+.env
 
