@@ -13,4 +13,5 @@ before_script:
   - psql -c 'create database fast_food_db;' -U postgres
   
 after_script:
-  - ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info  && npm run clear
+  - ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info  && npm run
+  
