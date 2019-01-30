@@ -1,0 +1,18 @@
+# Coverage directory used by  istanbul
+coverage/
+
+# Dependency directories
+node_modules/
+
+# transpiled ES5 code directory
+dist/
+
+# Coverage directory used by istanbul
+coverage/
+
+#.vscode file
+.vscode
+
+#.env
+.env
+
