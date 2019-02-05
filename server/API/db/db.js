@@ -41,6 +41,9 @@ async function createTables() {
   const userData = `INSERT INTO user_accounts (user_name,user_role,user_email,user_password)
       VALUES ('testName', 'User', 'testEmail@address.com', '${bcrypt.hashSync('P@ssword', 10)}'),
       ('tester', 'Admin', 'tester@owner.com', '${bcrypt.hashSync('P@$$word123', 10)}'),
+      ('shegun', 'Admin', 'oluwasegun.adepoju@andela.com', '${bcrypt.hashSync('P@$$word123', 10)}'),
+      ('shegsteham', 'User', 'oluwasegunadepoju@gmail.com', '${bcrypt.hashSync('P@$$word123', 10)}'),
+      ('usertest', 'User', 'usertest@user.com', '${bcrypt.hashSync('P@$$word123', 10)}'),
       ('backEndTester', 'User', 'backendtester1@address.com', '${bcrypt.hashSync('backendtester123', 10)}');`;
 
   const orderData = `INSERT INTO orders (item_id, quantity, total_price, order_status,customer_id, customer_address)
