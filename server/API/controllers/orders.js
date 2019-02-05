@@ -120,7 +120,6 @@ export default class Controller {
     });
   }
 
-
   /**
    * Delete an order in the database
    *  @param {*} req - incomming request data
