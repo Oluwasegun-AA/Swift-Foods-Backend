@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import swagger from 'swagger-ui-express';
 import YAML from 'yamljs';
+import cors from 'cors';
 import ordersRoute from './API/routes/orders';
 import itemsRoute from './API/routes/foodItems';
 import usersRoute from './API/routes/users';
@@ -25,14 +26,17 @@ const message = () => {
 };
 
 // instanciate imported middlewares
+app.all('*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
+app.use(cors());
 app.use(logger('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 app.use(express.static('client/public'));
 app.use('/api/v1/api-docs', swagger.serve, swagger.setup(apiDocs));
