@@ -1,5 +1,5 @@
 # Fast Food Fast
-[![Build Status](https://travis-ci.org/shegsteham/Fast-Food-Fast.svg?branch=develop)](https://travis-ci.org/shegsteham/Fast-Food-Fast)    [![Coverage Status](https://coveralls.io/repos/github/shegsteham/Fast-Food-Fast/badge.svg?branch=develop)](https://coveralls.io/github/shegsteham/Fast-Food-Fast?branch=develop)    [![Maintainability](https://api.codeclimate.com/v1/badges/c2dc0578de1fdecc0c8f/maintainability)](https://codeclimate.com/github/shegsteham/Fast-Food-Fast/maintainability)    ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
+[![Build Status](https://travis-ci.org/shegsteham/Fast-Food-Fast.svg?branch=develop)](https://travis-ci.org/shegsteham/Fast-Food-Fast)    [![Coverage Status](https://coveralls.io/repos/github/shegsteham/Fast-Food-Fast/badge.svg?branch=develop)](https://coveralls.io/github/shegsteham/Fast-Food-Fast?branch=develop)   ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 ## Table of Contents
 

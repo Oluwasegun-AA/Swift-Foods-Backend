@@ -14,7 +14,7 @@ function menuValidation(req, res, next) {
   if (!(req.body.item_price)) { err.Price_Error = 'Item Price is Required'; }
   if (!(req.body.item_tag)) { err.Tag_Error = 'Item Tag is Required'; }
   if (!(req.body.item_image)) { err.Tag_Error = 'Item Image is Required'; }
-  if ((Object.keys(err).length) > 0) { return res.status(400).send({ status: 'Bad Request', success: 'false', Error_Log: err }); }
+  if ((Object.keys(err).length) > 0) { return res.status(400).send({ status: 'Bad Request', success: false, Error_Log: err }); }
   next();
 }
 
@@ -30,12 +30,12 @@ function menuIdValidation(req, res, next) {
   if (id === undefined || id === null || id === '') {
     err.Id_Error = 'Bad Request, food Item ID is Required';
   } else if (!(id.match(num))) { err.status = 'unsuccessful'; err.Id_Error = 'Bad Request, food Item ID is not Valid'; }
-  if ((Object.keys(err).length) > 0) { return res.status(400).send({ status: 'unsuccessful', Error_Log: err }); }
+  if ((Object.keys(err).length) > 0) { return res.status(400).send({ success: false, status: 'unsuccessful', Error_Log: err }); }
   next();
 }
 
 function menuPostIdValidation(req, res, next) {
-  return res.status(400).send({ status: 'unsuccessful', Error: 'Bad Request, food Item ID is not Required' });
+  return res.status(400).send({ success: false, status: 'unsuccessful', Error: 'Bad Request, food Item ID is not Required' });
 }
 
 // export statement
