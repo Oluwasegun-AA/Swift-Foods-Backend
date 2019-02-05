@@ -21,7 +21,7 @@ function orderValidation(req, res, next) {
   if (!(req.body.customer_address)) { wrong.Price_Error = 'Customer Address is Required'; }
   if ((req.body.item_id) !== undefined) { if (!((digits).test(req.body.item_id))) { wrong.ItemId_Error = 'Item Id is not Valid'; } }
   if (!(req.body.item_id)) { wrong.ItemId_Error = 'Item ID is Required'; }
-  if ((Object.keys(wrong).length) > 0) { return res.status(400).send({ status: 'Bad Request', success: 'false', Error_Log: wrong }); }
+  if ((Object.keys(wrong).length) > 0) { return res.status(400).send({ status: 'Bad Request', success: false, Error_Log: wrong }); }
   next();
 }
 
@@ -38,12 +38,12 @@ function orderIdValidation(req, res, next) {
   if (id === undefined || id === null || id === '') {
     wrong.orderId_Error = 'Bad Request, Order ID is Required';
   } else if (!(id.match(digits))) { wrong.status = 'unsuccessful'; wrong.orderId_Error = 'Bad Request, Order ID is not Valid'; }
-  if ((Object.keys(wrong).length) > 0) { return res.status(400).send({ status: 'unsuccessful', Error_Log: wrong }); }
+  if ((Object.keys(wrong).length) > 0) { return res.status(400).send({ success: false, status: 'unsuccessful', Error_Log: wrong }); }
   next();
 }
 
 function orderPostIdValidation(req, res, next) {
-  return res.status(400).send({ status: 'unsuccessful', Error: 'Bad Request, Order ID is not Required' });
+  return res.status(400).send({ success: false, status: 'unsuccessful', Error: 'Bad Request, Order ID is not Required' });
 }
 
 // export statement
