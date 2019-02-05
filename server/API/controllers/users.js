@@ -32,8 +32,8 @@ export default class Controller {
           VALUES($1, $2, $3, $4) returning *`;
     const { rows } = await database.query(command, newUser);
     return res.status(201).send({
+      success: true,
       status: 'User Sent Successfully',
-      auth: 'true',
       User_sent: rows[0],
     });
   }
@@ -48,27 +48,26 @@ export default class Controller {
         req.body.user_password = req.body.hashedPassword;
         const token = await createToken(req.body);
         return res.status(200).send({
-          auth: 'true', token, message: 'Login Successful', user: rows[0],
+          success: true, token, message: 'Login Successful', user: rows[0],
         });
       }
-      return res.status(404).send({ auth: 'false', token: null, message: 'user not found' });
+      return res.status(404).send({ success: false, token: null, message: 'user not found' });
     }
     const { rows } = await database.query(command, [req.body.user_name]);
-    console.log(rows[0]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'User Not Found in the Database',
       });
     }
     const passwordIsValid = await bcrypt.compareSync(req.body.user_password, rows[0].user_password);
     if (!passwordIsValid) {
-      return res.status(401).send({ auth: 'false', token: null });
+      return res.status(401).send({ success: false, token: null });
     }
     req.body.user_id = rows[0].user_id;
     const token = await createToken(rows[0]);
     return res.status(200).send({
-      auth: 'true', token, message: 'Login Successful', user: rows[0],
+      success: true, token, message: 'Login Successful', user: rows[0],
     });
   }
 
@@ -82,7 +81,7 @@ export default class Controller {
     const command = 'SELECT * FROM user_accounts';
     const { rows, rowCount } = await database.query(command);
     return res.status(200).send({
-      success: 'true',
+      success: true,
       status: 'Users Data retrieved successfully',
       user_accounts: rows,
       total_user_accounts: rowCount,
@@ -100,11 +99,11 @@ export default class Controller {
     const { rows } = await database.query(command, [req.params.userId]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'User Not Found in the Database',
       });
     } return res.status(200).send({
-      success: 'true',
+      success: true,
       status: 'User retrieved successfully',
       User: rows[0],
     });
@@ -124,6 +123,7 @@ export default class Controller {
       VALUES($1, $2, $3, $4) returning *`;
     const { rows } = await database.query(command, newUser);
     return res.status(201).send({
+      success: true,
       User_sent: rows[0],
       status: 'User Sent Successfully',
     });
@@ -147,12 +147,13 @@ export default class Controller {
     const { rows } = await database.query(findQuery, [req.params.userId]);
     if (!rows[0]) {
       return res.status(410).send({
-        success: 'false',
+        success: false,
         status: 'Requested resourse is no longer available',
       });
     }
     const response = await database.query(updateQuery, user);
     return res.status(200).send({
+      success: true,
       userId: req.params.userId,
       old_user: rows[0],
       update: response.rows[0],
@@ -171,12 +172,12 @@ export default class Controller {
     const { rows } = await database.query(deleteQuery, [req.params.userId]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'User Not Found in the Database',
       });
     }
     return res.status(200).send({
-      success: 'true',
+      success: true,
       status: 'User deleted successfuly',
     });
   }

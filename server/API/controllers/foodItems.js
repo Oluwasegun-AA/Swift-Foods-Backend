@@ -16,7 +16,7 @@ export default class Controller {
       rowCount,
     } = await database.query(command);
     return res.status(200).send({
-      success: 'true',
+      success: true,
       status: 'Food Items retrieved successfully',
       Food_Items: rows,
       total_Food_Items: rowCount,
@@ -36,7 +36,7 @@ export default class Controller {
     } = await database.query(command, [req.params.itemId]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'Item Not Found in the Database',
       });
     } return res.status(200).send({
@@ -62,6 +62,7 @@ export default class Controller {
       rows,
     } = await database.query(command, newItem);
     return res.status(201).send({
+      success: true,
       item_sent: rows[0],
       status: 'Item Sent Successfully',
     });
@@ -86,19 +87,19 @@ export default class Controller {
     } = await database.query(findQuery, [req.params.itemId]);
     if (!rows[0]) {
       return res.status(410).send({
-        success: 'false',
+        success: false,
         status: 'Requested resourse is no longer available',
       });
     }
     const response = await database.query(updateQuery, item);
     return res.status(200).send({
+      success: true,
       itemId: req.params.itemId,
       old_item: rows[0],
       update: response.rows[0],
       status: 'Update successful',
     });
   }
-
 
   /**
    * Delete an Item in the database
@@ -113,12 +114,12 @@ export default class Controller {
     } = await database.query(deleteQuery, [req.params.itemId]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'Item Not Found in the Database',
       });
     }
     return res.status(200).send({
-      success: 'true',
+      success: true,
       status: 'Item deleted successfuly',
     });
   }

@@ -17,7 +17,7 @@ export default class Controller {
       rowCount,
     } = await database.query(command);
     return res.status(200).send({
-      success: 'true',
+      success: true,
       status: 'Orders Retrieved Successfully',
       orders: rows,
       total_orders: rowCount,
@@ -37,7 +37,7 @@ export default class Controller {
     } = await database.query(command, [req.params.orderId]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'Order Not Found in the Database',
       });
     } return res.status(200).send({
@@ -55,11 +55,11 @@ export default class Controller {
     } = await database.query(command, [req.params.userId]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'Orders Not Found in the Database',
       });
     } return res.status(200).json({
-      success: 'true',
+      success: true,
       status: 'Orders Retrieved Successfully',
       order: rows,
     });
@@ -81,6 +81,7 @@ export default class Controller {
       rows,
     } = await database.query(command, newOrder);
     return res.status(201).send({
+      success: true,
       order_sent: rows[0],
       status: 'Order Sent Successfully',
     });
@@ -105,19 +106,19 @@ export default class Controller {
     } = await database.query(findQuery, [req.params.orderId]);
     if (!rows[0]) {
       return res.status(410).send({
-        success: 'false',
+        success: false,
         status: 'Order Not Found in the Database',
       });
     }
     const response = await database.query(updateQuery, order);
     return res.status(200).send({
+      success: true,
       orderId: req.params.orderId,
       old_Order: rows[0],
       update: response.rows[0],
       status: 'Update successful',
     });
   }
-
 
   /**
    * Delete an order in the database
@@ -132,12 +133,12 @@ export default class Controller {
     } = await database.query(deleteQuery, [req.params.orderId]);
     if (!rows[0]) {
       return res.status(404).send({
-        success: 'false',
+        success: false,
         status: 'Order Not Found in the Database',
       });
     }
     return res.status(200).send({
-      success: 'true',
+      success: true,
       status: 'Order Deleted Successfuly',
     });
   }
