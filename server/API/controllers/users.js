@@ -62,7 +62,7 @@ export default class Controller {
     }
     const passwordIsValid = await bcrypt.compareSync(req.body.user_password, rows[0].user_password);
     if (!passwordIsValid) {
-      return res.status(401).send({ success: false, token: null });
+      return res.status(401).send({ success: false, Message: 'Invalid Password', token: null });
     }
     req.body.user_id = rows[0].user_id;
     const token = await createToken(rows[0]);
